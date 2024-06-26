@@ -8,13 +8,22 @@
     "start": "next start",
     "lint": "next lint"
   },
+  "prisma": {
+    "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed/seed.ts"
+  },
   "dependencies": {
     "@prisma/client": "^5.16.0",
+    "bcrypt": "^5.1.1",
+    "jsonwebtoken": "^9.0.2",
     "next": "14.2.4",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "zod": "^3.23.8",
+    "zod-validation-error": "^3.3.0"
   },
   "devDependencies": {
+    "@types/bcrypt": "^5.0.2",
+    "@types/jsonwebtoken": "^9.0.6",
     "@types/node": "^20.14.8",
     "@types/react": "^18",
     "@types/react-dom": "^18",
