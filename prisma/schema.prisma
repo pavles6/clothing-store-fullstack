@@ -14,16 +14,18 @@ datasource db {
 }
 
 model Product {
-  id          String   @id @default(cuid())
-  name        String
-  description String
-  price       Float
-  image       String
-  category    String
-  size        String
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-  orders      Order[]
+  id                String              @id @default(cuid())
+  name              String
+  description       String
+  price             Float
+  image             String
+  category          String
+  size              String
+  createdAt         DateTime            @default(now())
+  updatedAt         DateTime            @updatedAt
+  orders            Order[]
+  Rating            Rating[]
+  RatingsOnProducts RatingsOnProducts[]
 }
 
 model Order {
@@ -37,12 +39,37 @@ model Order {
 }
 
 model User {
-  id        String   @id @default(cuid())
-  email     String   @unique
+  id        String              @id @default(cuid())
+  email     String              @unique
   password  String
   name      String
-  role      String   @default("USER")
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  role      String              @default("USER")
+  createdAt DateTime            @default(now())
+  updatedAt DateTime            @updatedAt
   orders    Order[]
+  Ratings   RatingsOnProducts[]
+}
+
+model Rating {
+  id                String              @id @default(cuid())
+  product           Product             @relation(fields: [productId], references: [id])
+  productId         String
+  rating            Int
+  comment           String
+  createdAt         DateTime            @default(now())
+  updatedAt         DateTime            @updatedAt
+  RatingsOnProducts RatingsOnProducts[]
+}
+
+model RatingsOnProducts {
+  product     Product  @relation(fields: [productId], references: [id])
+  productId   String
+  rating      Rating   @relation(fields: [ratingId], references: [id])
+  ratingId    String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  createdBy   User     @relation(fields: [createdById], references: [id])
+  createdById String
+
+  @@id([productId, ratingId])
 }

@@ -35,7 +35,11 @@ export async function POST(request: Request) {
     }
 
     const token = jwt.sign(
-      { name: existingUser.name, email: existingUser.email },
+      {
+        name: existingUser.name,
+        email: existingUser.email,
+        role: existingUser.role,
+      },
       process.env.JWT_ACCESS_TOKEN_SECRET as string,
       { expiresIn: "10m" },
     );

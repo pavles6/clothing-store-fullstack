@@ -26,7 +26,11 @@ export async function POST(request: Request) {
     }
 
     const token = jwt.sign(
-      { name: decoded.name as string, email: decoded.email },
+      {
+        name: decoded.name as string,
+        email: decoded.email,
+        role: decoded.role,
+      },
       process.env.JWT_ACCESS_TOKEN_SECRET as string,
     );
 
