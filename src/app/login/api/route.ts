@@ -62,9 +62,11 @@ export async function POST(request: Request) {
     return Response.json({ token });
   } catch (error) {
     if (isZodErrorLike(error)) {
-      return Response.json(fromError(error).toString(), { status: 400 });
+      return Response.json(
+        { message: fromError(error).toString() },
+        { status: 400 },
+      );
     }
-
     return Response.json({ message: "Internal server error" }, { status: 500 });
   }
 }

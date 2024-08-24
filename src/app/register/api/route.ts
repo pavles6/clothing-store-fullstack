@@ -37,6 +37,8 @@ export async function POST(request: Request) {
       },
     });
 
+    console.log(process.env);
+
     const token = jwt.sign(
       { name: user.name, email: user.email, role: user.role },
       process.env.JWT_ACCESS_TOKEN_SECRET as string,
@@ -62,6 +64,9 @@ export async function POST(request: Request) {
   } catch (error) {
     console.log(fromError(error));
 
-    return Response.json(fromError(error).toString(), { status: 400 });
+    return Response.json(
+      { message: fromError(error).toString() },
+      { status: 400 },
+    );
   }
 }
