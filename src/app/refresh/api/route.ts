@@ -2,7 +2,7 @@ import { refreshTokenName } from "@/utils/constants";
 import jwt, { JwtPayload } from "jsonwebtoken";
 import { cookies } from "next/headers";
 
-export async function POST(request: Request) {
+export async function POST() {
   const refreshToken = cookies().get(refreshTokenName);
 
   if (!refreshToken) {
@@ -27,6 +27,7 @@ export async function POST(request: Request) {
 
     const token = jwt.sign(
       {
+        id: decoded.id,
         name: decoded.name as string,
         email: decoded.email,
         role: decoded.role,

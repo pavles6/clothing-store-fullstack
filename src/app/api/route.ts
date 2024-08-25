@@ -1,3 +1,3 @@
-export async function GET(request: Request) {
-  return Response.json({ message: "Hi" });
+export async function GET() {
+  return Response.json({ message: "ClothingStore API 🚀" });
 }
