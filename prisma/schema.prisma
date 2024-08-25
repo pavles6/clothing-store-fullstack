@@ -12,7 +12,7 @@ model Product {
   name        String
   description String
   price       Float
-  image       String
+  image       String?
   category    String
   size        String
   createdAt   DateTime @default(now())
