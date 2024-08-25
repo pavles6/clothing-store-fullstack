@@ -16,6 +16,11 @@ const protectedRoutes: {
       GET: ["ADMIN"],
     },
   },
+  "/ratings/api": {
+    method: {
+      POST: ["USER", "ADMIN"],
+    },
+  },
 };
 
 const protectedRoutesList = Object.keys(protectedRoutes);

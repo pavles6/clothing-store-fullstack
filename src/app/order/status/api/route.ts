@@ -94,9 +94,9 @@ export async function GET(req: NextRequest) {
 
   if (!orderHistory)
     return Response.json(
-      { message: "No order history found" },
+      { message: "No order status history found" },
       { status: 404 },
     );
 
-  return Response.json(orderHistory);
+  return Response.json(orderHistory.OrderStatusHistory);
 }
