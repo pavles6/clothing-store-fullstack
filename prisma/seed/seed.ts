@@ -93,6 +93,12 @@ async function main() {
     },
   ];
 
+  const existingProducts = await prisma.product.findFirst();
+  if (existingProducts) {
+    console.log("Products already exist in the database. Skipping seed.");
+    return;
+  }
+
   for (const product of products) {
     await prisma.product.create({
       data: product,

@@ -8,4 +8,6 @@ RUN npm install
 
 COPY . .
 
-CMD ["npm", "run", "dev"]
+WORKDIR /app
+
+CMD npx prisma db push && npx prisma db seed && npm run dev
