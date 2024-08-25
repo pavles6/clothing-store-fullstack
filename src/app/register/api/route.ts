@@ -4,6 +4,11 @@ import { fromError } from "zod-validation-error";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { cookies } from "next/headers";
+import {
+  ACCESS_TOKEN_EXPIRATION,
+  REFRESH_TOKEN_EXPIRATION,
+  REFRESH_TOKEN_EXPIRATION_IN_SECONDS,
+} from "@/utils/constants";
 
 const registerPayloadSchema = z.object({
   name: z.string().min(1).max(255),
@@ -37,18 +42,16 @@ export async function POST(request: Request) {
       },
     });
 
-    console.log(process.env);
-
     const token = jwt.sign(
       { name: user.name, email: user.email, role: user.role, id: user.id },
       process.env.JWT_ACCESS_TOKEN_SECRET as string,
-      { expiresIn: "10m" },
+      { expiresIn: ACCESS_TOKEN_EXPIRATION },
     );
 
     const refreshToken = jwt.sign(
       { email: user.email },
       process.env.JWT_REFRESH_TOKEN_SECRET as string,
-      { expiresIn: "7d" },
+      { expiresIn: REFRESH_TOKEN_EXPIRATION },
     );
 
     cookies().set({
@@ -57,7 +60,7 @@ export async function POST(request: Request) {
       httpOnly: true,
       secure: true,
       sameSite: "none",
-      maxAge: 60 * 60 * 24 * 1000,
+      maxAge: REFRESH_TOKEN_EXPIRATION_IN_SECONDS,
     });
 
     return Response.json({ token });

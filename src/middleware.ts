@@ -10,9 +10,10 @@ const protectedRoutes: {
       GET: ["ADMIN"],
     },
   },
-  "order/status/api": {
+  "/order/status/api": {
     method: {
       PATCH: ["ADMIN"],
+      GET: ["ADMIN"],
     },
   },
 };
