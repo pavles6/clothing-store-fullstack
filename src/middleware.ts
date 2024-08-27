@@ -39,7 +39,6 @@ export function middleware(request: NextRequest) {
       const decoded = jwt.decode(token) as JwtPayload;
 
       if (!role.includes(decoded.role)) {
-        console.log("au brate");
         return Response.json({ message: "Forbidden" }, { status: 403 });
       }
     } else {
