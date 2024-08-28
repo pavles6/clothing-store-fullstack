@@ -13,4 +13,4 @@
 
 
 ### Dijagram baze podataka
-()[]
+![diagram](https://github.com/user-attachments/assets/c9accb39-5201-4571-80c3-96854acb7170)
