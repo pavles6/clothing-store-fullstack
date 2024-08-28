@@ -14,6 +14,8 @@ const addRatingPayloadSchema = z.object({
 export async function POST(req: NextRequest) {
   const user = await getAuthenticatedUser(req);
 
+  console.log(user.id);
+
   try {
     const { productId, rating, comment } =
       await addRatingPayloadSchema.parseAsync(await req.json());
@@ -38,7 +40,7 @@ export async function POST(req: NextRequest) {
           },
         },
         status: {
-          equals: "COMPLETE",
+          equals: "COMPLETED",
         },
       },
     });
@@ -89,6 +91,12 @@ export async function GET(req: NextRequest) {
 
   if (!id) {
     return Response.json({ message: "Missing product id" }, { status: 400 });
+  }
+
+  const productExists = await prisma.product.findUnique({ where: { id } });
+
+  if (!productExists) {
+    return Response.json({ message: "Product not found" }, { status: 404 });
   }
 
   const ratings = await prisma.rating.findMany({

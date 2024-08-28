@@ -4,6 +4,7 @@ import { fromError, isZodErrorLike } from "zod-validation-error";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { cookies } from "next/headers";
+import { REFRESH_TOKEN_EXPIRATION } from "@/utils/constants";
 
 const loginPayloadSchema = z.object({
   email: z.string().email(),
@@ -48,7 +49,7 @@ export async function POST(request: Request) {
     const refreshToken = jwt.sign(
       { email: existingUser.email },
       process.env.JWT_REFRESH_TOKEN_SECRET as string,
-      { expiresIn: "7d" },
+      { expiresIn: REFRESH_TOKEN_EXPIRATION },
     );
 
     cookies().set({

@@ -1,11 +1,16 @@
 ## ClothingStore app
 
-### Local environment set-up
-#### Prerequisites
-* Docker installed along with docker-compose
+### Pokretanje iz lokalnog okruzenja
 
-#### Steps
-1. Clone the repo
-2. Run `cp .env.example .env` and update the environment variables in the `.env` file
-2. Run `docker-compose up -d` to start the local environment
-3. Navigate to `http://localhost:3000` to access the app
+#### Preduslovi
+* Instaliran Docker
+
+#### Koraci
+1. Klonirajte repozitorijum
+2. Pokrenite `cp .env.example .env` i izmenite env varijable u `.env` fajlu
+2. Pokrenite `docker-compose up` da pokrente aplikaciju u lokalnom okruzenju
+3. U zavisnosti od vrednosti $APP_PORT npr. 3000, aplikacija ce biti dostupna na: `http://localhost:3000`
+
+
+### Dijagram baze podataka
+()[]

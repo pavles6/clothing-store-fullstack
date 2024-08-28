@@ -2,6 +2,7 @@
 	"info": {
 		"_postman_id": "b2602e57-bb3a-43a6-8c18-dadaafed78ae",
 		"name": "ClothingStore",
+		"description": "API Dokumentacija za aplikaciju Clothing Store",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "6304956"
 	},
@@ -16,7 +17,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"name\":\"Pavle\",\n    \"email\": \"pavle@asdf.com\",\n    \"password\":\"Test12345!\"\n}",
+							"raw": "{\n    \"name\":\"Pavle\",\n    \"email\": \"pavle@asdf.com\",\n    \"password\":\"Tes\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -32,9 +33,188 @@
 								"register",
 								"api"
 							]
-						}
+						},
+						"description": "Registracija korisnika.\n\n`email` se tretira kao unikatno polje, tako da pokusaj registracije sa vec iskoriscenom email adresom rezultuje HTTP statusu 400\n\nZahtevi za lozinku: min. 8 karaktera\n\nObavezna polja: `name`, `email`, `password`"
 					},
-					"response": []
+					"response": [
+						{
+							"name": "[409] Korisnik sa datom email adresom vec postoji",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\":\"Pavle\",\n    \"email\": \"paavle@asdf.com\",\n    \"password\":\"Test12345!\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/register/api",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"register",
+										"api"
+									]
+								}
+							},
+							"status": "Conflict",
+							"code": 409,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "vary",
+									"value": "RSC, Next-Router-State-Tree, Next-Router-Prefetch"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 28 Aug 2024 18:11:15 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"User with a same email address already exists\"\n}"
+						},
+						{
+							"name": "[200] Uspesna registracija",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\":\"Pavle\",\n    \"email\": \"paavle@asdf.com\",\n    \"password\":\"Test12345!\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{hostname}}/register/api",
+									"host": [
+										"{{hostname}}"
+									],
+									"path": [
+										"register",
+										"api"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "vary",
+									"value": "RSC, Next-Router-State-Tree, Next-Router-Prefetch"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json"
+								},
+								{
+									"key": "set-cookie",
+									"value": "refreshToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InBhYXZsZUBhc2RmLmNvbSIsImlhdCI6MTcyNDg3OTQxNiwiZXhwIjoxNzI1NDg0MjE2fQ._wgcfuORMMz93OmAezU430Si4wO_bxStlMvVNcZcVYY; Path=/; Expires=Wed, 04 Sep 2024 21:10:16 GMT; Max-Age=604800; Secure; HttpOnly; SameSite=none"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 28 Aug 2024 21:10:16 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiUGF2bGUiLCJlbWFpbCI6InBhYXZsZUBhc2RmLmNvbSIsInJvbGUiOiJVU0VSIiwiaWQiOiJjbTBlY28zY28wMDAxOWdvdnI4bjVmcHM0IiwiaWF0IjoxNzI0ODc5NDE2LCJleHAiOjE3MjQ4ODAwMTZ9.DQ-95ktBJa8Pdqt8MJpma55lpSpLWYhRFMQevc2pdl0\"\n}"
+						},
+						{
+							"name": "[400] Lozinka ne ispunjava kriterijume",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\":\"Pavle\",\n    \"email\": \"pavle@asdf.com\",\n    \"password\":\"Tes\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{hostname}}/register/api",
+									"host": [
+										"{{hostname}}"
+									],
+									"path": [
+										"register",
+										"api"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "vary",
+									"value": "RSC, Next-Router-State-Tree, Next-Router-Prefetch"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 28 Aug 2024 21:10:32 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Validation error: String must contain at least 8 character(s) at \\\"password\\\"\"\n}"
+						}
+					]
 				},
 				{
 					"name": "Login",
@@ -59,9 +239,133 @@
 								"login",
 								"api"
 							]
-						}
+						},
+						"description": "Log-in endpoint za postojeceg korisnika.\n\nHTTP 400 status ukoliko korisnik ne sa datim mejlom ne postoji/lozinka se ne podudara.\n\nObavezna polja: `email`, `password`"
 					},
-					"response": []
+					"response": [
+						{
+							"name": "[400] Netacni email/lozinka ili za dat email korisnik ne postoji",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"paee@asdf.com\",\n    \"password\": \"Test12345!\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/login/api",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"login",
+										"api"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "vary",
+									"value": "RSC, Next-Router-State-Tree, Next-Router-Prefetch"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 28 Aug 2024 21:10:48 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Email or password are incorrect.\"\n}"
+						},
+						{
+							"name": "[200] Uspesan login",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"pavle@asdf.com\",\n    \"password\": \"Test12345!\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/login/api",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"login",
+										"api"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "vary",
+									"value": "RSC, Next-Router-State-Tree, Next-Router-Prefetch"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json"
+								},
+								{
+									"key": "set-cookie",
+									"value": "refreshToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InBhdmxlQGFzZGYuY29tIiwiaWF0IjoxNzI0ODc5NDY5LCJleHAiOjE3MjU0ODQyNjl9.Xr1grr0aM9f3QoUNsflK7yJvakEoEJ04d6E6pXkdnO8; Path=/; Expires=Tue, 25 May 2027 21:11:09 GMT; Max-Age=86400000; Secure; HttpOnly; SameSite=none"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 28 Aug 2024 21:11:09 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImNtMGN2OGdvNDAwMDA5Z292NW5rM2Y2NjIiLCJuYW1lIjoiUGF2bGUiLCJlbWFpbCI6InBhdmxlQGFzZGYuY29tIiwicm9sZSI6IlVTRVIiLCJpYXQiOjE3MjQ4Nzk0NjksImV4cCI6MTcyNDg4MDA2OX0.6LOV7MQ72E5zzbxdFqKGzTK2ScauLWTjNhktG30Cpts\"\n}"
+						}
+					]
 				},
 				{
 					"name": "Refresh access token",
@@ -77,11 +381,160 @@
 								"refresh",
 								"api"
 							]
-						}
+						},
+						"description": "Endpoint za obnovu (refresh) access token-a. Na osnovu datog cookie headera pod imenom `refreshToken` izdaje novi access token ukoliko refresh token nije istekao. Ne zahteva body.\n\nHTTP status 400 ukoliko refresh token nije dat putem cookie-a.\n\nHTTP status 401 ukoliko je dat token istekao."
 					},
-					"response": []
+					"response": [
+						{
+							"name": "[200] Uspesno dobijanje refreshovanog access tokena",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/refresh/api",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"refresh",
+										"api"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "vary",
+									"value": "RSC, Next-Router-State-Tree, Next-Router-Prefetch"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 28 Aug 2024 21:11:17 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InBhdmxlQGFzZGYuY29tIiwiaWF0IjoxNzI0ODc5NDc3fQ.KlgttXfbTFPdQfwy5vFUTY_WMkOAJXjTjQVjioMnTUE\"\n}"
+						},
+						{
+							"name": "[400] Nije poslat refresh token kao cookie header",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{hostname}}/refresh/api",
+									"host": [
+										"{{hostname}}"
+									],
+									"path": [
+										"refresh",
+										"api"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "vary",
+									"value": "RSC, Next-Router-State-Tree, Next-Router-Prefetch"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 28 Aug 2024 21:11:40 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"No refresh token provided\"\n}"
+						},
+						{
+							"name": "[401] Istekao refresh token",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{hostname}}/refresh/api",
+									"host": [
+										"{{hostname}}"
+									],
+									"path": [
+										"refresh",
+										"api"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "vary",
+									"value": "RSC, Next-Router-State-Tree, Next-Router-Prefetch"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 28 Aug 2024 21:33:21 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Unauthorized\"\n}"
+						}
+					]
 				}
-			]
+			],
+			"description": "API Endpointi vezani za entitet \"User\""
 		},
 		{
 			"name": "Product",
@@ -89,6 +542,9 @@
 				{
 					"name": "Fetch all products",
 					"request": {
+						"auth": {
+							"type": "noauth"
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
@@ -110,29 +566,272 @@
 									"value": "10"
 								}
 							]
-						}
+						},
+						"description": "Dohvatanje vise proizvoda. obavezni query parametri `skip` i `take` u svrhu paginacije."
 					},
-					"response": []
+					"response": [
+						{
+							"name": "[200] Proizvodi",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/products/api?",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"products",
+										"api"
+									],
+									"query": [
+										{
+											"key": "",
+											"value": null
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "vary",
+									"value": "RSC, Next-Router-State-Tree, Next-Router-Prefetch"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 28 Aug 2024 21:13:21 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"id\": \"cm0cv6uw90000l5wnbsg49f6g\",\n        \"name\": \"Classic White T-Shirt\",\n        \"description\": \"A classic white t-shirt made from 100% cotton.\",\n        \"price\": 19.99,\n        \"image\": \"https://www.sunspel.com/cdn/shop/products/mtsh0001-whaa-3.jpg?v=1676389968&width=1150\",\n        \"category\": \"Clothing\",\n        \"size\": \"M\",\n        \"createdAt\": \"2024-08-27T20:13:12.298Z\",\n        \"updatedAt\": \"2024-08-27T20:13:12.298Z\"\n    },\n    {\n        \"id\": \"cm0cv6ux30001l5wnyqblczfm\",\n        \"name\": \"Denim Jeans\",\n        \"description\": \"Comfortable and stylish denim jeans.\",\n        \"price\": 49.99,\n        \"image\": \"https://imgproxy.asket.com/e:1/width:1250/resize:fit/quality:85/aHR0cHM6Ly9kM212ZGhhb2wwNjJmeS5jbG91ZGZyb250Lm5ldC9kL2EvZi8yL2RhZjIxYTkyMjM2ZjY5MzYxZWYxYTgxZmIzODMxN2UyNmVkZmJiYjBfYXNrZXRfd2RqX21lX3NlYl9zbGlkZXNob3dfMDEuanBn.webp\",\n        \"category\": \"Clothing\",\n        \"size\": \"L\",\n        \"createdAt\": \"2024-08-27T20:13:12.327Z\",\n        \"updatedAt\": \"2024-08-27T20:13:12.327Z\"\n    },\n    {\n        \"id\": \"cm0cv6ux40002l5wn0dj1yxqx\",\n        \"name\": \"Black Hoodie\",\n        \"description\": \"A warm black hoodie perfect for cold weather.\",\n        \"price\": 39.99,\n        \"image\": \"https://assets.ajio.com/medias/sys_master/root/20230706/yiCl/64a616c9a9b42d15c939a335/-473Wx593H-466336868-black-MODEL.jpg\",\n        \"category\": \"Clothing\",\n        \"size\": \"L\",\n        \"createdAt\": \"2024-08-27T20:13:12.328Z\",\n        \"updatedAt\": \"2024-08-27T20:13:12.328Z\"\n    },\n    {\n        \"id\": \"cm0cv6ux50003l5wnnz575r8n\",\n        \"name\": \"Summer Dress\",\n        \"description\": \"A light and breezy summer dress.\",\n        \"price\": 29.99,\n        \"image\": \"https://m.media-amazon.com/images/I/71qqPTyiatS._AC_UY1000_.jpg\",\n        \"category\": \"Clothing\",\n        \"size\": \"S\",\n        \"createdAt\": \"2024-08-27T20:13:12.329Z\",\n        \"updatedAt\": \"2024-08-27T20:13:12.329Z\"\n    },\n    {\n        \"id\": \"cm0cv6ux50004l5wnk6t12fmp\",\n        \"name\": \"Running Shoes\",\n        \"description\": \"Comfortable running shoes for all terrains.\",\n        \"price\": 59.99,\n        \"image\": \"https://hips.hearstapps.com/hmg-prod/images/run-nike-running-shoes-646cdd1a19c41.jpg?crop=0.6666666666666666xw:1xh;center,top&resize=1200:*\",\n        \"category\": \"Clothing\",\n        \"size\": \"XL\",\n        \"createdAt\": \"2024-08-27T20:13:12.330Z\",\n        \"updatedAt\": \"2024-08-27T20:13:12.330Z\"\n    },\n    {\n        \"id\": \"cm0cv6ux60005l5wnsw9wy5ve\",\n        \"name\": \"Woolen Scarf\",\n        \"description\": \"A warm woolen scarf for chilly days.\",\n        \"price\": 14.99,\n        \"image\": \"https://m.media-amazon.com/images/I/514kuUYOkxL._AC_UY350_.jpg\",\n        \"category\": \"Clothing\",\n        \"size\": \"M\",\n        \"createdAt\": \"2024-08-27T20:13:12.331Z\",\n        \"updatedAt\": \"2024-08-27T20:13:12.331Z\"\n    },\n    {\n        \"id\": \"cm0cv6ux70006l5wnbyu5t9ss\",\n        \"name\": \"Leather Jacket\",\n        \"description\": \"A stylish leather jacket for a bold look.\",\n        \"price\": 89.99,\n        \"image\": \"https://buffalojackson.com/cdn/shop/products/thompson-leather-moto-jacket-black-4_029f49bf-085e-4ca5-8cef-faef56e4ec35.jpg?v=1642952150&width=1080\",\n        \"category\": \"Clothing\",\n        \"size\": \"M\",\n        \"createdAt\": \"2024-08-27T20:13:12.331Z\",\n        \"updatedAt\": \"2024-08-27T20:13:12.331Z\"\n    },\n    {\n        \"id\": \"cm0cv6ux80007l5wn9u06wqyw\",\n        \"name\": \"Casual Shorts\",\n        \"description\": \"Comfortable shorts for casual wear.\",\n        \"price\": 24.99,\n        \"image\": \"https://m.media-amazon.com/images/I/61Bi8BVh3EL._AC_UY1000_.jpg\",\n        \"category\": \"Clothing\",\n        \"size\": \"L\",\n        \"createdAt\": \"2024-08-27T20:13:12.332Z\",\n        \"updatedAt\": \"2024-08-27T20:13:12.332Z\"\n    },\n    {\n        \"id\": \"cm0cv6uxa0008l5wnbef25676\",\n        \"name\": \"Formal Shirt\",\n        \"description\": \"A crisp formal shirt for office wear.\",\n        \"price\": 34.99,\n        \"image\": \"https://blackberrys.com/cdn/shop/files/printed-formal-shirt-in-blue-jedi-blackberrys-clothing-1_1200x1200.jpg?v=1685949827\",\n        \"category\": \"Clothing\",\n        \"size\": \"XL\",\n        \"createdAt\": \"2024-08-27T20:13:12.334Z\",\n        \"updatedAt\": \"2024-08-27T20:13:12.334Z\"\n    },\n    {\n        \"id\": \"cm0cv6uxb0009l5wn59i275bz\",\n        \"name\": \"Beanie Hat\",\n        \"description\": \"A cozy beanie hat to keep you warm.\",\n        \"price\": 12.99,\n        \"image\": \"https://marksandspencer.com.ph/cdn/shop/products/SD_03_T09_1830_T7_X_EC_0.jpg?v=1637835721\",\n        \"category\": \"Clothing\",\n        \"size\": \"M\",\n        \"createdAt\": \"2024-08-27T20:13:12.335Z\",\n        \"updatedAt\": \"2024-08-27T20:13:12.335Z\"\n    }\n]"
+						},
+						{
+							"name": "[400] Odsustvo obaveznih query parametara",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{hostname}}/products/api?",
+									"host": [
+										"{{hostname}}"
+									],
+									"path": [
+										"products",
+										"api"
+									],
+									"query": [
+										{
+											"key": "",
+											"value": null
+										}
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "vary",
+									"value": "RSC, Next-Router-State-Tree, Next-Router-Prefetch"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 28 Aug 2024 21:13:34 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Missing skip or take params\"\n}"
+						}
+					]
 				},
 				{
 					"name": "Fetch product",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
 					"request": {
 						"method": "GET",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
-							"raw": "{{hostname}}/products/cm086ztb30000eo409t2lpxqx",
+							"raw": "{{hostname}}/products/cm0a0jj0400083quq19hi09xw",
 							"host": [
 								"{{hostname}}"
 							],
 							"path": [
 								"products",
-								"cm086ztb30000eo409t2lpxqx"
+								"cm0a0jj0400083quq19hi09xw"
 							]
-						}
+						},
+						"description": "Dohvatanje pojedinacnog proizvoda."
 					},
-					"response": []
+					"response": [
+						{
+							"name": "[404] Za dat id ne postoji proizvod",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/products/cm0cv6ux40002l5wn0dj1yxqx",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"products",
+										"cm0cv6ux40002l5wn0dj1yxqx"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "vary",
+									"value": "RSC, Next-Router-State-Tree, Next-Router-Prefetch"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 28 Aug 2024 21:13:57 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Product not found\"\n}"
+						},
+						{
+							"name": "[200] Proizvod",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{hostname}}/products/cm0cv6ux40002l5wn0dj1yxqx",
+									"host": [
+										"{{hostname}}"
+									],
+									"path": [
+										"products",
+										"cm0cv6ux40002l5wn0dj1yxqx"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "vary",
+									"value": "RSC, Next-Router-State-Tree, Next-Router-Prefetch"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 28 Aug 2024 21:14:28 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": \"cm0cv6ux40002l5wn0dj1yxqx\",\n    \"name\": \"Black Hoodie\",\n    \"description\": \"A warm black hoodie perfect for cold weather.\",\n    \"price\": 39.99,\n    \"image\": \"https://assets.ajio.com/medias/sys_master/root/20230706/yiCl/64a616c9a9b42d15c939a335/-473Wx593H-466336868-black-MODEL.jpg\",\n    \"category\": \"Clothing\",\n    \"size\": \"L\",\n    \"createdAt\": \"2024-08-27T20:13:12.328Z\",\n    \"updatedAt\": \"2024-08-27T20:13:12.328Z\"\n}"
+						}
+					]
 				}
-			]
+			],
+			"description": "API Endpointi vezani za entitet \"Product\""
 		},
 		{
 			"name": "Order",
@@ -157,7 +856,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"orderId\": \"cm09shf6p0001bhi8mqf24fpl\",\n    \"status\": \"CANCELED\"\n}",
+									"raw": "{\n    \"orderId\": \"cm0ecuu5c00029gov30bcx3w4\",\n    \"status\": \"COMPLETED\"\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -174,19 +873,386 @@
 										"status",
 										"api"
 									]
-								}
+								},
+								"description": "Izmena statusa postojece porudzbine. Zahteva rolu `ADMIN` - administratorske privilegije.\n\nHTTP status 400 ukoliko je status porudzbine jednak `status` -u iz request body-a.\n\nHTTP status 403 ukoliko autentifikovan korisnik bez role `ADMIN` poziva endpoint. (manjak autorizacije)\n\nHTTP status 404 ukoliko dat `orderId` ne pripada nijednoj porudzbini iz baze.\n\nObavezna polja: `orderId`, `status`"
 							},
-							"response": []
+							"response": [
+								{
+									"name": "[403] User nema neophodnu rolu",
+									"originalRequest": {
+										"method": "PATCH",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"orderId\": \"cm0a2eson000a4kbwxz4swaxq\",\n    \"status\": \"COMPLETED\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:3000/order/status/api",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "3000",
+											"path": [
+												"order",
+												"status",
+												"api"
+											]
+										}
+									},
+									"status": "Forbidden",
+									"code": 403,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "content-type",
+											"value": "application/json"
+										},
+										{
+											"key": "Vary",
+											"value": "Accept-Encoding"
+										},
+										{
+											"key": "Content-Encoding",
+											"value": "gzip"
+										},
+										{
+											"key": "Date",
+											"value": "Wed, 28 Aug 2024 21:14:41 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"message\": \"Forbidden\"\n}"
+								},
+								{
+									"name": "[400] Porudzbina je vec  u datom statusu",
+									"originalRequest": {
+										"method": "PATCH",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"orderId\": \"cm0ecuu5c00029gov30bcx3w4\",\n    \"status\": \"PENDING\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{hostname}}/order/status/api",
+											"host": [
+												"{{hostname}}"
+											],
+											"path": [
+												"order",
+												"status",
+												"api"
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "vary",
+											"value": "RSC, Next-Router-State-Tree, Next-Router-Prefetch"
+										},
+										{
+											"key": "content-type",
+											"value": "application/json"
+										},
+										{
+											"key": "Date",
+											"value": "Wed, 28 Aug 2024 21:16:16 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"message\": \"Status is already PENDING\"\n}"
+								},
+								{
+									"name": "[200] Uspesna promena statusa",
+									"originalRequest": {
+										"method": "PATCH",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"orderId\": \"cm0ecuu5c00029gov30bcx3w4\",\n    \"status\": \"COMPLETED\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{hostname}}/order/status/api",
+											"host": [
+												"{{hostname}}"
+											],
+											"path": [
+												"order",
+												"status",
+												"api"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "vary",
+											"value": "RSC, Next-Router-State-Tree, Next-Router-Prefetch"
+										},
+										{
+											"key": "content-type",
+											"value": "application/json"
+										},
+										{
+											"key": "Date",
+											"value": "Wed, 28 Aug 2024 21:16:59 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"message\": \"Status changed successfully from PENDING to COMPLETED for order cm0ecuu5c00029gov30bcx3w4\"\n}"
+								}
+							]
 						},
 						{
 							"name": "Get status change history",
 							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token\n}}",
+											"type": "string"
+										}
+									]
+								},
 								"method": "GET",
-								"header": []
+								"header": [],
+								"url": {
+									"raw": "{{hostname}}/order/status/api",
+									"host": [
+										"{{hostname}}"
+									],
+									"path": [
+										"order",
+										"status",
+										"api"
+									]
+								},
+								"description": "Dohvatanje istorije promene statusa porudzbine. Zahteva administratorske privilegije (rola `ADMIN`)\n\nHTTP status 400 ukoliko nije prisutan `id` query parametar.\n\nHTTP status 403 ukoliko korisnik nije autorizovan.\n\nHTTP status 404 ukoliko za dat `id` porudzbina ne postoji."
 							},
-							"response": []
+							"response": [
+								{
+									"name": "[404] Ne postoji order za dat id",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:3000/order/status/api?id=cm0a2eson000a4kbwxz4swaxq",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "3000",
+											"path": [
+												"order",
+												"status",
+												"api"
+											],
+											"query": [
+												{
+													"key": "id",
+													"value": "cm0a2eson000a4kbwxz4swaxq"
+												}
+											]
+										}
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "vary",
+											"value": "RSC, Next-Router-State-Tree, Next-Router-Prefetch"
+										},
+										{
+											"key": "content-type",
+											"value": "application/json"
+										},
+										{
+											"key": "Date",
+											"value": "Wed, 28 Aug 2024 21:17:16 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"message\": \"No order status history found\"\n}"
+								},
+								{
+									"name": "[200] Istorija promene statusa",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{hostname}}/order/status/api?id=cm0ecuu5c00029gov30bcx3w4",
+											"host": [
+												"{{hostname}}"
+											],
+											"path": [
+												"order",
+												"status",
+												"api"
+											],
+											"query": [
+												{
+													"key": "id",
+													"value": "cm0ecuu5c00029gov30bcx3w4"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "vary",
+											"value": "RSC, Next-Router-State-Tree, Next-Router-Prefetch"
+										},
+										{
+											"key": "content-type",
+											"value": "application/json"
+										},
+										{
+											"key": "Date",
+											"value": "Wed, 28 Aug 2024 21:17:40 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										}
+									],
+									"cookie": [],
+									"body": "[\n    {\n        \"changedFrom\": \"PENDING\",\n        \"changedTo\": \"COMPLETED\",\n        \"createdAt\": \"2024-08-28T21:16:59.282Z\",\n        \"updatedAt\": \"2024-08-28T21:16:59.282Z\",\n        \"User\": {\n            \"name\": \"Pavle\",\n            \"email\": \"pavle@asdf.com\"\n        }\n    }\n]"
+								},
+								{
+									"name": "[400] Nedostaje query param",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{hostname}}/order/status/api",
+											"host": [
+												"{{hostname}}"
+											],
+											"path": [
+												"order",
+												"status",
+												"api"
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "vary",
+											"value": "RSC, Next-Router-State-Tree, Next-Router-Prefetch"
+										},
+										{
+											"key": "content-type",
+											"value": "application/json"
+										},
+										{
+											"key": "Date",
+											"value": "Wed, 28 Aug 2024 21:17:54 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"message\": \"Missing order id\"\n}"
+								}
+							]
 						}
-					]
+					],
+					"description": "API Endpointi vezani za atribut entiteta \"Order\" - \"Status\""
 				},
 				{
 					"name": "Make an order",
@@ -205,7 +1271,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"products\": [\"cm09sb6sz0000104hdumlsc6w\", \"cm09sb6t90005104h0ksrzdrr\"]\n}",
+							"raw": "{\n    \"products\": [\"cm0cv6ux40002l5wn0dj1yxqx\"]\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -221,22 +1287,133 @@
 								"order",
 								"api"
 							]
-						}
+						},
+						"description": "Kreiranje porudzbine.\n\nZahteva autentifikovanog korisnika sa rolom `USER` ili `ADMIN` i niz validnih `id`\\-eva proizvoda.\n\nHTTP status 400 ukoliko u `products` array-u postoji `id` koji ne odgovara proizvodu iz baze."
 					},
-					"response": []
+					"response": [
+						{
+							"name": "[400] Proizvodi iz liste ne postoje",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"products\": [\"cm0a44kc70006kx9n24spnaob\"]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/order/api",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"order",
+										"api"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "vary",
+									"value": "RSC, Next-Router-State-Tree, Next-Router-Prefetch"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 28 Aug 2024 21:15:14 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Invalid product ids\"\n}"
+						},
+						{
+							"name": "[201] Uspesno kreirana porudzbina",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"products\": [\"cm0cv6ux40002l5wn0dj1yxqx\"]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{hostname}}/order/api",
+									"host": [
+										"{{hostname}}"
+									],
+									"path": [
+										"order",
+										"api"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "vary",
+									"value": "RSC, Next-Router-State-Tree, Next-Router-Prefetch"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 28 Aug 2024 21:15:30 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Order created successfully\",\n    \"order\": {\n        \"id\": \"cm0ecuu5c00029gov30bcx3w4\",\n        \"status\": \"PENDING\",\n        \"createdAt\": \"2024-08-28T21:15:30.720Z\",\n        \"updatedAt\": \"2024-08-28T21:15:30.720Z\",\n        \"orderedBy\": \"cm0cv8go400009gov5nk3f662\"\n    }\n}"
+						}
+					]
 				},
 				{
 					"name": "View all orders",
 					"request": {
 						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{refresh_token}}",
-									"type": "string"
-								}
-							]
+							"type": "noauth"
 						},
 						"method": "GET",
 						"header": [],
@@ -249,11 +1426,116 @@
 								"order",
 								"api"
 							]
-						}
+						},
+						"description": "Endpoint za dohvatanje liste svih porudzbina. Zahteva autentifikovanog korisnika sa rolom `ADMIN`"
 					},
-					"response": []
+					"response": [
+						{
+							"name": "[200] Pregled svih porudzbina",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/order/api",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"order",
+										"api"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "vary",
+									"value": "RSC, Next-Router-State-Tree, Next-Router-Prefetch"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 28 Aug 2024 21:18:58 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"orders\": [\n        {\n            \"id\": \"cm0ecuu5c00029gov30bcx3w4\",\n            \"status\": \"COMPLETED\",\n            \"User\": {\n                \"id\": \"cm0cv8go400009gov5nk3f662\",\n                \"name\": \"Pavle\"\n            },\n            \"products\": [\n                {\n                    \"id\": \"cm0cv6ux40002l5wn0dj1yxqx\",\n                    \"name\": \"Black Hoodie\",\n                    \"description\": \"A warm black hoodie perfect for cold weather.\",\n                    \"price\": 39.99,\n                    \"image\": \"https://assets.ajio.com/medias/sys_master/root/20230706/yiCl/64a616c9a9b42d15c939a335/-473Wx593H-466336868-black-MODEL.jpg\",\n                    \"category\": \"Clothing\",\n                    \"size\": \"L\",\n                    \"createdAt\": \"2024-08-27T20:13:12.328Z\",\n                    \"updatedAt\": \"2024-08-27T20:13:12.328Z\"\n                }\n            ]\n        },\n        {\n            \"id\": \"cm0ecyn5200049govmt1pheex\",\n            \"status\": \"PENDING\",\n            \"User\": {\n                \"id\": \"cm0cv8go400009gov5nk3f662\",\n                \"name\": \"Pavle\"\n            },\n            \"products\": [\n                {\n                    \"id\": \"cm0cv6ux40002l5wn0dj1yxqx\",\n                    \"name\": \"Black Hoodie\",\n                    \"description\": \"A warm black hoodie perfect for cold weather.\",\n                    \"price\": 39.99,\n                    \"image\": \"https://assets.ajio.com/medias/sys_master/root/20230706/yiCl/64a616c9a9b42d15c939a335/-473Wx593H-466336868-black-MODEL.jpg\",\n                    \"category\": \"Clothing\",\n                    \"size\": \"L\",\n                    \"createdAt\": \"2024-08-27T20:13:12.328Z\",\n                    \"updatedAt\": \"2024-08-27T20:13:12.328Z\"\n                }\n            ]\n        },\n        {\n            \"id\": \"cm0ecynzw00059gova0ud8osb\",\n            \"status\": \"PENDING\",\n            \"User\": {\n                \"id\": \"cm0cv8go400009gov5nk3f662\",\n                \"name\": \"Pavle\"\n            },\n            \"products\": [\n                {\n                    \"id\": \"cm0cv6ux40002l5wn0dj1yxqx\",\n                    \"name\": \"Black Hoodie\",\n                    \"description\": \"A warm black hoodie perfect for cold weather.\",\n                    \"price\": 39.99,\n                    \"image\": \"https://assets.ajio.com/medias/sys_master/root/20230706/yiCl/64a616c9a9b42d15c939a335/-473Wx593H-466336868-black-MODEL.jpg\",\n                    \"category\": \"Clothing\",\n                    \"size\": \"L\",\n                    \"createdAt\": \"2024-08-27T20:13:12.328Z\",\n                    \"updatedAt\": \"2024-08-27T20:13:12.328Z\"\n                }\n            ]\n        },\n        {\n            \"id\": \"cm0ecyofm00069gov67q6qex0\",\n            \"status\": \"PENDING\",\n            \"User\": {\n                \"id\": \"cm0cv8go400009gov5nk3f662\",\n                \"name\": \"Pavle\"\n            },\n            \"products\": [\n                {\n                    \"id\": \"cm0cv6ux40002l5wn0dj1yxqx\",\n                    \"name\": \"Black Hoodie\",\n                    \"description\": \"A warm black hoodie perfect for cold weather.\",\n                    \"price\": 39.99,\n                    \"image\": \"https://assets.ajio.com/medias/sys_master/root/20230706/yiCl/64a616c9a9b42d15c939a335/-473Wx593H-466336868-black-MODEL.jpg\",\n                    \"category\": \"Clothing\",\n                    \"size\": \"L\",\n                    \"createdAt\": \"2024-08-27T20:13:12.328Z\",\n                    \"updatedAt\": \"2024-08-27T20:13:12.328Z\"\n                }\n            ]\n        }\n    ]\n}"
+						},
+						{
+							"name": "[403] Nedostatak privilegija",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{hostname}}/order/api",
+									"host": [
+										"{{hostname}}"
+									],
+									"path": [
+										"order",
+										"api"
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "content-type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "gzip"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 28 Aug 2024 21:20:19 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Forbidden\"\n}"
+						}
+					]
 				}
-			]
+			],
+			"description": "API Endpointi vezani za entitet \"Order\""
 		},
 		{
 			"name": "Rating",
@@ -275,7 +1557,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"rating\": 5,\n    \"productId\": \"cm0a0jizg00003quqq777huzm\"\n}",
+							"raw": "{\n    \"rating\": 4,\n    \"productId\": \"cm0cv6ux40002l5wn0dj1yxqx\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -291,19 +1573,323 @@
 								"ratings",
 								"api"
 							]
-						}
+						},
+						"description": "Dodavanje ocene za isporucen proizvod. Zahteva autentifikovanog korisnika sa rolom `USER` ili `ADMIN` , kao i da u bazi podataka postoji porudzbina koju je porucio korisnik koji dodaje ocenu. Ocena se moze dodati iskljucivo ako je porudzbina u `COMPLETED` statusu.\n\nHTTP status 400 ukoliko korisnik pokusava da doda ocenu za proizvod koji nije narucio, ili je ocenu vec dodao."
 					},
-					"response": []
+					"response": [
+						{
+							"name": "[400] Nepostojeci proizvod",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"rating\": 4,\n    \"productId\": \"cm0a44kc70006kx9n24spnaob\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/ratings/api",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"ratings",
+										"api"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "vary",
+									"value": "RSC, Next-Router-State-Tree, Next-Router-Prefetch"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 28 Aug 2024 21:20:35 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Cannot add a rating for a non-existing product\"\n}"
+						},
+						{
+							"name": "[404] ne postoji order za trenutnog korisnika",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"rating\": 4,\n    \"productId\": \"cm0cv6ux40002l5wn0dj1yxqx\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{hostname}}/ratings/api",
+									"host": [
+										"{{hostname}}"
+									],
+									"path": [
+										"ratings",
+										"api"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "vary",
+									"value": "RSC, Next-Router-State-Tree, Next-Router-Prefetch"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 28 Aug 2024 21:21:03 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Order not found\"\n}"
+						},
+						{
+							"name": "[200] Uspesno dodata ocena",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"rating\": 4,\n    \"productId\": \"cm0cv6ux40002l5wn0dj1yxqx\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{hostname}}/ratings/api",
+									"host": [
+										"{{hostname}}"
+									],
+									"path": [
+										"ratings",
+										"api"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "vary",
+									"value": "RSC, Next-Router-State-Tree, Next-Router-Prefetch"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 28 Aug 2024 21:26:58 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Rating added successfully\"\n}"
+						}
+					]
 				},
 				{
 					"name": "Fetch ratings for product",
 					"request": {
 						"method": "GET",
-						"header": []
+						"header": [],
+						"url": {
+							"raw": "{{hostname}}/ratings/api?id=cm0a44kc70006kx9n24spnaob",
+							"host": [
+								"{{hostname}}"
+							],
+							"path": [
+								"ratings",
+								"api"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "cm0a44kc70006kx9n24spnaob"
+								}
+							]
+						},
+						"description": "Dohvatanje svih ocena za dat proizvod. Zahteva validan `Product` id u vidu query parametra.\n\nHTTP status 400 ukoliko dat `id` ne pripada nijednom proizvodu u bazi."
 					},
-					"response": []
+					"response": [
+						{
+							"name": "[404] Proizvod ne postoji",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/ratings/api?id=cm0cv6ux40002l5wn0dj1yxqx",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"ratings",
+										"api"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "cm0cv6ux40002l5wn0dj1yxqx"
+										}
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "vary",
+									"value": "RSC, Next-Router-State-Tree, Next-Router-Prefetch"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 28 Aug 2024 21:28:12 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Product not found\"\n}"
+						},
+						{
+							"name": "[200] Ocene za proizvod",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{hostname}}/ratings/api?id=cm0cv6ux40002l5wn0dj1yxqx",
+									"host": [
+										"{{hostname}}"
+									],
+									"path": [
+										"ratings",
+										"api"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "cm0cv6ux40002l5wn0dj1yxqx"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "vary",
+									"value": "RSC, Next-Router-State-Tree, Next-Router-Prefetch"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 28 Aug 2024 21:28:35 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"id\": \"cm0ed9kht00079goveailwlzl\",\n        \"productId\": \"cm0cv6ux40002l5wn0dj1yxqx\",\n        \"rating\": 4,\n        \"comment\": \"\",\n        \"createdAt\": \"2024-08-28T21:26:58.049Z\",\n        \"updatedAt\": \"2024-08-28T21:26:58.049Z\",\n        \"userId\": \"cm0cv8go400009gov5nk3f662\"\n    }\n]"
+						}
+					]
 				}
-			]
+			],
+			"description": "API Endpointi vezani za entitet \"Rating\""
 		},
 		{
 			"name": "/",
@@ -318,7 +1904,8 @@
 					"path": [
 						"api"
 					]
-				}
+				},
+				"description": "👋"
 			},
 			"response": []
 		}
@@ -348,7 +1935,7 @@
 	"variable": [
 		{
 			"key": "hostname",
-			"value": "http://localhost:3000\n",
+			"value": "http://localhost:3000",
 			"type": "string"
 		},
 		{
