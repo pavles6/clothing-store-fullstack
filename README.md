@@ -14,3 +14,6 @@
 
 ### Dijagram baze podataka
 ![diagram](https://github.com/user-attachments/assets/c9accb39-5201-4571-80c3-96854acb7170)
+
+### API dokumentacija
+Postman kolekcija u JSON formatu se nalazi u root-u projekta
